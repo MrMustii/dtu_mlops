@@ -11,28 +11,26 @@ class MyDataset(Dataset):
     def __init__(self, raw_data_path: Path) -> None:
         self.data_path = raw_data_path
 
-        train_images , train_target = [], []
+        train_images, train_target = [], []
         for i in range(6):
             train_images.append(torch.load(f"{raw_data_path}/train_images_{i}.pt"))
             train_target.append(torch.load(f"{raw_data_path}/train_target_{i}.pt"))
         self.train_images = torch.cat(train_images)
         self.train_target = torch.cat(train_target)
 
-
         self.test_images: torch.Tensor = torch.load(f"{raw_data_path}/test_images.pt")
         self.test_target: torch.Tensor = torch.load(f"{raw_data_path}/test_target.pt")
 
-
     def __len__(self) -> int:
         """Return the length of the dataset."""
-        return len(self.test_images)+len(self.train_images)                
+        return len(self.test_images) + len(self.train_images)
 
     def __getitem__(self, index: int):
         """Return a given sample from the dataset."""
         if index < len(self.train_images):
             return self.train_images[index]
         else:
-            return self.test_images[index-len(self.test_images)]
+            return self.test_images[index - len(self.test_images)]
 
     def normalize(self, images: torch.Tensor) -> torch.Tensor:
         """Normalize images."""
@@ -52,14 +50,13 @@ class MyDataset(Dataset):
         torch.save(train_images, f"{output_folder}/train_images.pt")
         torch.save(train_target, f"{output_folder}/train_target.pt")
         torch.save(test_images, f"{output_folder}/test_images.pt")
-        torch.save(test_target, f"{output_folder}/test_target.pt")        
-
+        torch.save(test_target, f"{output_folder}/test_target.pt")
 
 
 def preprocess(raw_data_path: Path, output_folder: Path) -> None:
     print("Preprocessing data...")
     dataset = MyDataset(raw_data_path)
-    dataset.preprocess( output_folder)
+    dataset.preprocess(output_folder)
 
 
 def corrupt_mnist() -> tuple[torch.utils.data.Dataset, torch.utils.data.Dataset]:
