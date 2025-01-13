@@ -2,3 +2,24 @@ torch==2.5.1
 typer==0.15.1
 fastapi==0.115.6
 uvicorn==0.34.0
+python-dotenv
+nbconvert
+torch
+torchvision
+pipreqs
+# s2 - organisation and version control
+typer
+invoke
+cookiecutter
+dvc
+dvc-gdrive
+ruff
+mypy
+matplotlib
+# s3 - reproducibility
+hydra-core
+# s4 - debugging and logging
+pytorch-lightning
+wandb
+snakeviz
+torch_tb_profiler
