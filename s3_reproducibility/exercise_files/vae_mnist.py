@@ -5,6 +5,7 @@ A simple implementation of Gaussian MLP Encoder and Decoder trained on MNIST
 
 import os
 
+import hydra
 import torch
 import torch.nn as nn
 import torchvision.transforms as transforms
@@ -13,7 +14,6 @@ from torch.optim import Adam
 from torch.utils.data import DataLoader
 from torchvision.datasets import MNIST
 from torchvision.utils import save_image
-import hydra
 
 
 @hydra.main(config_path=".", config_name="config")
@@ -39,11 +39,10 @@ def main(cfg):
     train_loader = DataLoader(dataset=train_dataset, batch_size=batch_size, shuffle=True)
     test_loader = DataLoader(dataset=test_dataset, batch_size=batch_size, shuffle=False)
 
-    encoder = Encoder(input_dim=x_dim, hidden_dim=hidden_dim, latent_dim=latent_dim,seed=seed)
-    decoder = Decoder(latent_dim=latent_dim, hidden_dim=hidden_dim, output_dim=x_dim,seed=seed)
+    encoder = Encoder(input_dim=x_dim, hidden_dim=hidden_dim, latent_dim=latent_dim, seed=seed)
+    decoder = Decoder(latent_dim=latent_dim, hidden_dim=hidden_dim, output_dim=x_dim, seed=seed)
 
     model = Model(encoder=encoder, decoder=decoder)
-
 
     def loss_function(x, x_hat, mean, log_var):
         """Elbo loss function."""
@@ -51,9 +50,7 @@ def main(cfg):
         kld = -0.5 * torch.sum(1 + log_var - mean.pow(2) - log_var.exp())
         return reproduction_loss + kld
 
-
     optimizer = Adam(model.parameters(), lr=learning_rate)
-
 
     print("Start training VAE...")
     model.train()
@@ -100,6 +97,7 @@ def main(cfg):
         generated_images = decoder(noise)
 
     save_image(generated_images.view(batch_size, 1, 28, 28), "generated_sample.png")
+
 
 if __name__ == "__main__":
     main()
