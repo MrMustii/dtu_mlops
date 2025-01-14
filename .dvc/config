@@ -2,3 +2,4 @@
     remote = storage
 ['remote "storage"']
     url = gs://mlops-data-bucket-1
+    version_aware = true
