@@ -16,8 +16,8 @@ app = FastAPI()
 @app.get("/")
 def read_root():
     """Simple root endpoint."""
-    return {"Hello": "World"}
-
+    response = {"message": HTTPStatus.OK.phrase, "status-code": HTTPStatus.OK}
+    return response
 
 @app.get("/items/{item_id}")
 def read_item(item_id: int):
