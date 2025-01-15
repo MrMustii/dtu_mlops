@@ -7,14 +7,13 @@ on:
     branches: [ master, main ]
 
 jobs:
-   build:
+  build:
     runs-on: ${{ matrix.os }}
     strategy:
-    fail-fast: false
-    matrix:
+      fail-fast: false
+      matrix:
         os: ["ubuntu-latest", "windows-latest", "macos-latest"]
         python-version: ["3.10", "3.11", "3.12"]
-
 
     steps:
     - name: Checkout
