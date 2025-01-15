@@ -3,7 +3,7 @@
 # s1 - development environment
 python-dotenv
 nbconvert
-torch
+# torch
 torchvision
 pipreqs
 # s2 - organisation and version control
@@ -20,7 +20,7 @@ hydra-core
 pytorch-lightning
 wandb
 snakeviz
-torch_tb_profiler
+# torch_tb_profiler
 # s5 - continuous integration
 pre-commit
 pytest
@@ -49,4 +49,4 @@ mkdocs-material
 streamlit
 optuna
 prefect
-neural_compressor
+# neural_compressor

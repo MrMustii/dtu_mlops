@@ -5,13 +5,14 @@ import torch.nn as nn
 class Encoder(nn.Module):
     """Encoder module for VAE."""
 
-    def __init__(self, input_dim, hidden_dim, latent_dim) -> None:
+    def __init__(self, input_dim, hidden_dim, latent_dim, seed) -> None:
         super().__init__()
 
         self.FC_input = nn.Linear(input_dim, hidden_dim)
         self.FC_mean = nn.Linear(hidden_dim, latent_dim)
         self.FC_var = nn.Linear(hidden_dim, latent_dim)
         self.training = True
+        self.seed = seed
 
     def forward(self, x):
         """Forward pass of the encoder module."""
@@ -33,7 +34,7 @@ class Encoder(nn.Module):
 class Decoder(nn.Module):
     """Decoder module for VAE."""
 
-    def __init__(self, latent_dim, hidden_dim, output_dim) -> None:
+    def __init__(self, latent_dim, hidden_dim, output_dim, seed) -> None:
         super().__init__()
         self.FC_hidden = nn.Linear(latent_dim, hidden_dim)
         self.FC_output = nn.Linear(hidden_dim, output_dim)
