@@ -1,0 +1,19 @@
+steps:
+- name: 'gcr.io/cloud-builders/docker'
+  id: 'Build container image'
+  args: [
+    'build',
+    '.',
+    '-t',
+    'europe-north1-docker.pkg.dev/$PROJECT_ID/container-repo/image',
+    '-f',
+    's6_the_cloud/exercise_files/file.dockerfile'
+  ]
+- name: 'gcr.io/cloud-builders/docker'
+  id: 'Push container image'
+  args: [
+    'push',
+    'europe-north1-docker.pkg.dev/$PROJECT_ID/container-repo/image'
+  ]
+options:
+  logging: CLOUD_LOGGING_ONLY
