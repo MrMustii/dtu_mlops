@@ -171,6 +171,7 @@ corruptmnist_v2/
 .vscode/
 
 # data
+
 s2_organisation_and_version_control/M6/myproject/data/
 s4_debugging_and_logging/exercise_files/datasets/MNIST/
 datasets/MNIST/raw/
